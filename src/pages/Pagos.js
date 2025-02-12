@@ -17,7 +17,7 @@ const Pagos = () => {
         <div className="ml-2 h-px flex-1 bg-gray-300"></div>
       </div>
       <div className="bg-[#e4d9e1] rounded-lg  p-5">
-              <h4 className="font-medium text-sm text-gray-700">Notas de Historial</h4>
+              <h4 className="font-medium text-sm text-gray-700">Pagos pendientes</h4>
             </div>
     </main>
   );
