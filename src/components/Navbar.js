@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { GoHome } from "react-icons/go";
 import { MdDateRange, MdOutlinePaid } from "react-icons/md";
 import { FaRegCommentAlt } from "react-icons/fa";
-import { IoPersonSharp } from "react-icons/io5";
 import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
 import { BsFileMedical } from "react-icons/bs"; 
 
@@ -38,7 +37,6 @@ const Sidebar = () => {
         <SidebarLink to="/citas" text="Citas" icon={<MdDateRange  className="w-5 h-5"/>} active={isActive("/citas")} expanded={expanded} />
         <SidebarLink to="/pagos" text="Pagos" icon={<MdOutlinePaid className="w-5 h-5"/>} active={isActive("/pagos")} expanded={expanded} />
         <SidebarLink to="/comunicacion" text="Comunicación"icon={<FaRegCommentAlt className="w-5 h-5"/>} active={isActive("/comunicacion")}expanded={expanded}/>
-        <SidebarLink to="/personalizacion"text="Personalizacion" icon={<IoPersonSharp className="w-5 h-5"/>} active={isActive("/personalizacion")}expanded={expanded}/>
         <SidebarLink to="/historialClinico" text="HistorialClinico" icon={<BsFileMedical className="w-5 h-5"/>} active={isActive("/historialClinico")}expanded={expanded}/>
       </nav>
     </aside>
@@ -54,7 +52,7 @@ const SidebarLink = ({ to, text, icon, active, expanded }) => (
   >
     {icon}
     <span className={`transition-all ${expanded ? "w-auto" : "w-0 overflow-hidden"}`}>{text}</span>
-    {active && <div className="absolute right-2 w-2 h-2 rounded bg-[#26221f]" />}
+    {active && <div className="absolute right-2 w-2 h-2 rounded bg-[#9d7f97]" />}
   </Link>
 );
 
