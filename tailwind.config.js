@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       fontFamily:{
         Urbanist:["Urbanist","sans-serif"],
+        lato: ["Lato", "sans-serif"],
       },
     },
   },

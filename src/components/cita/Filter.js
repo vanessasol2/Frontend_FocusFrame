@@ -5,11 +5,7 @@ import { HiMiniChevronDown } from "react-icons/hi2";
 export default function Filter() {
   return (
     <div className="flex items-center  py-4 px-6 ">
-      <div >
-        <h3 className="font-Urbanist text-lg text-gray-900">
-            Proximas Citas
-        </h3>
-      </div>
+      
       <Menu as="div" className="relative inline-block text-left py-4 px-6">
         <div>
           <Menu.Button className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50">

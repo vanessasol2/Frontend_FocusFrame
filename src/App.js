@@ -1,30 +1,31 @@
-
-import Navbar from "./components/Navbar";
-import Citas from "./pages/Citas";
-import Pagos from "./pages/Pagos"; 
-import Comunicacion from './pages/Comunicacion';
-import { Routes, Route } from "react-router-dom"; 
-import Home from "./pages/Home";
-import HistorialClinico from './pages/HistorialClinico';
-
+import { Routes, Route } from "react-router-dom";
+import { LoginFormPaciente } from "./auth/LoginFormPaciente";
+import { RegisterFormPaciente } from "./auth/RegisterFormPaciente";
+import HomePaciente from "./pages/paciente/HomePaciente";
+import CitasPaciente from "./pages/paciente/CitasPaciente";
+import PagosPaciente from "./pages/paciente/PagosPaciente";
+import HistorialPaciente from "./pages/paciente/HistorialPaciente";
+import ComunicacionPaciente from "./pages/paciente/ComunicacionPaciente";
 
 function App() {
-  
   return (
-    <div className="grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
-      <Navbar />
+    <Routes>
+      {/* Ruta de login y registro */}
+      <Route path="/login" element={<LoginFormPaciente />} />
+      <Route path="/register" element={<RegisterFormPaciente />} />
+      <Route path="/register/:pacienteId" element={<RegisterFormPaciente />} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/citas" element={<Citas />} />
-        <Route path="/pagos" element={<Pagos />} />
-        <Route path="/comunicacion" element={<Comunicacion />} />
-        <Route path="/historialClinico" element={<HistorialClinico />} />
+       
 
-      </Routes>
+     
+      <Route path="/" element={<HomePaciente />} />
+      <Route path="/citas" element={<CitasPaciente />} />
+      <Route path="/pagos" element={<PagosPaciente />} />
+      <Route path="/historial" element={<HistorialPaciente />} />
+      <Route path="/comunicacion" element={<ComunicacionPaciente />} />
 
-      
-    </div>
+
+    </Routes>
   );
 }
 
