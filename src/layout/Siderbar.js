@@ -13,17 +13,26 @@ const Sidebar = () => {
   // Componente para enlaces del sidebar
   const isActive = (path) => location.pathname === path;
 
+  // Estilos
+  const styles = {
+    sidebar: "h-screen bg-white shadow-lg w-64 transition-all p-4",
+    header: "p-4 border-b",
+    greeting: "text-sm text-gray-500",
+    userName: "text-lg font-semibold text-[#3D3A4A]",
+    nav: "flex flex-col gap-2 mt-4 text-[#3D3A4A]",
+    logout: "mt-8 border-t pt-4",
+  };
+
   return (
-    <aside className="h-screen bg-white shadow-lg w-64 transition-all p-4">
-      
+    <aside className={styles.sidebar}>
       {/* Encabezado con usuario */}
-      <div className="p-4 border-b">
-        <p className="text-sm text-gray-500">Hello 👋,</p>
-        <h2 className="text-lg font-semibold text-[#3D3A4A]">{userName}</h2>
+      <div className={styles.header}>
+        <p className={styles.greeting}>Hello 👋,</p>
+        <h2 className={styles.userName}>{userName}</h2>
       </div>
 
       {/* Navegación */}
-      <nav className="flex flex-col gap-2 mt-4 text-[#3D3A4A]">
+      <nav className={styles.nav}>
         <SidebarLink to="/" text="My Home" icon={<AiOutlineUser />} active={isActive("/")} />
         <SidebarLink to="/citas" text="Citas" icon={<MdDateRange />} active={isActive("/citas")} />
         <SidebarLink to="/pagos" text="Pagos" icon={<MdOutlinePaid />} active={isActive("/pagos")} />
@@ -32,23 +41,28 @@ const Sidebar = () => {
       </nav>
 
       {/* Cierre de sesión */}
-      <div className="mt-8 border-t pt-4">
+      <div className={styles.logout}>
         <SidebarLink to="/logout" text="Sign out" icon={<IoMdLogOut />} />
       </div>
     </aside>
   );
 };
 
-const SidebarLink = ({ to, text, icon, active }) => (
-  <Link
-    to={to}
-    className={`flex items-center gap-3 py-3 px-4 rounded-lg transition-all text-base ${
-      active ? "bg-[#F3F0FF] text-[#8350e8]" : "hover:bg-[#F3F0FF] hover:text-[#8350e8]"
-    }`}
-  >
-    <span className="text-[#8350e8] text-xl">{icon}</span>
-    {text}
-  </Link>
-);
+const SidebarLink = ({ to, text, icon, active }) => {
+  const linkStyles = `flex items-center gap-3 py-3 px-4 rounded-lg transition-all text-base ${
+    active ? "bg-[#F3F0FF] text-[#5603AD] font-semibold" : "hover:bg-[#F3F0FF] hover:text-[#8350e8]"
+  }`;
+
+  return (
+    <Link
+      to={to}
+      className={linkStyles}
+      aria-current={active ? "page" : undefined}
+    >
+      <span className="text-[#8350e8] text-xl">{icon}</span>
+      {text}
+    </Link>
+  );
+};
 
 export default Sidebar;

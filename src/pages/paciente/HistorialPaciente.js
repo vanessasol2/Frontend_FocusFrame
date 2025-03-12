@@ -1,5 +1,5 @@
-import FilterHisto from "../../components/FilterHisto";
-import Accordion from "../../components/Accordion";
+import FilterHisto from "../../components/historial/FilterHisto";
+import Accordion from "../../components/historial/Accordion";
 import MainLayout from "../../layout/MainLayout";
 import { User, Calendar, Briefcase, Phone, HeartHandshake, Activity } from "lucide-react";
 import { Pill, HeartPulse, Stethoscope } from "lucide-react";

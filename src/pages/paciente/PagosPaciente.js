@@ -1,21 +1,38 @@
-import React from "react";
+import { useState } from "react";
 import MainLayout from "../../layout/MainLayout";
+import Pendientes from "../../components/pago/Pendientes";
+import Movimientos from "../../components/pago/Movimientos";
 
-const Pagos = () => {
+const PagosPaciente = () => {
+  const [activeTab, setActiveTab] = useState("pendiente");
+
   return (
     <MainLayout>
-      <div className="flex items-center">
-        <div>
-          <h3 className="font-Urbanist text-lg text-gray-900  py-4 px-6  ">
-            Pagos pendientes
-          </h3>
+      <div className="p-6">
+        {/* Botones de Tabs */}
+        <div className="flex gap-4">
+          <button
+            className={`px-4 py-2 rounded-lg ${activeTab === "pendiente" ? "bg-[#6D3DBD] text-white" : "bg-gray-200 text-gray-600"}`}
+            onClick={() => setActiveTab("pendiente")}
+          >
+            Pendiente
+          </button>
+          <button
+            className={`px-4 py-2 rounded-lg ${activeTab === "movimientos" ? "bg-[#6D3DBD] text-white" : "bg-gray-200 text-gray-600"}`}
+            onClick={() => setActiveTab("movimientos")}
+          >
+            Movimientos
+          </button>
         </div>
-      </div>
-      <div className="bg-[#e4d9e1] rounded-lg  p-5">
-        <h4 className="font-medium text-sm text-gray-700">Pagos pendientes</h4>
+
+        {/* Línea separadora */}
+        <div className="mt-4 border-t border-gray-300"></div>
+
+        {/* Renderizar componentes según la pestaña activa */}
+        {activeTab === "pendiente" ? <Pendientes /> : <Movimientos />}
       </div>
     </MainLayout>
   );
 };
 
-export default Pagos;
+export default PagosPaciente;

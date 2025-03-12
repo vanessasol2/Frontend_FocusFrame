@@ -9,13 +9,13 @@ const PageTitle = ({ title }) => {
   return (
     <div>
       {/* Título Principal */}
-      <h1 className="text-3xl font-bold font-urbanist text-[#8350e8] tracking-wide">
+      <h1 className="text-3xl font-bold font-urbanist text-[#5603AD] tracking-wide">
         {title}
       </h1>
 
       {/* Miga de Pan debajo del título */}
       <nav className="text-sm text-gray-500 flex items-center space-x-1 mt-1">
-        <Link to="/" className="hover:text-[#8350e8] transition">
+        <Link to="/" className="hover:text-[#5603AD] transition">
           Inicio
         </Link>
         {pathnames.map((value, index) => {
@@ -23,7 +23,7 @@ const PageTitle = ({ title }) => {
           return (
             <React.Fragment key={to}>
               <IoChevronForward className="text-gray-400 text-xs" />
-              <Link to={to} className="hover:text-[#8350e8] transition capitalize">
+              <Link to={to} className="hover:text-[#5603AD] transition capitalize">
                 {value}
               </Link>
             </React.Fragment>
