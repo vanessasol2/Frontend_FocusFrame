@@ -36,7 +36,7 @@ const HistorialPaciente = () => {
             <img
               src="https://img.freepik.com/foto-gratis/chico-caucasico-atractivo-seguro-beige-pullon-sonriendo-ampliamente-mientras-esta-pie-contra-gris_176420-44508.jpg"
               alt="Vanessa Solano"
-              className="rounded-full w-24 h-24 mx-auto mb-4 "
+              className="rounded-full w-24 h-24 mx-auto mb-4 object-cover "
             />
             <h2 className="text-lg font-semibold text-gray-700">
               Vanessa Solano

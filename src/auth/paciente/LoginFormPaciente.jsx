@@ -1,28 +1,27 @@
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"; 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";  
+import { login } from "../../redux/slices/AuthSlice";  
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import agendar from "../img/agendar.webp";
+import agendar from "../../img/agendar.webp";
+
 
 export function LoginFormPaciente() {
   const [mensajeError, setMensajeError] = useState("");
   const [password, setPasswordValue] = useState("");
   const [email, setEmailValue] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
+  const [rememberMe, setRememberMe] = useState(false);  
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handlePasswordChange = (e) => {
-    setPasswordValue(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmailValue(e.target.value);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const handlePasswordChange = (e) => setPasswordValue(e.target.value);
+  const handleEmailChange = (e) => setEmailValue(e.target.value);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const handleRememberMeChange = () => setRememberMe(!rememberMe);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,9 +33,25 @@ export function LoginFormPaciente() {
       const response = await axios.post("http://localhost:8081/auth/login", data);
 
       if (response.data && response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        alert("Login exitoso");
-        navigate("/");
+        const token = response.data.token;
+
+        // Guardar el token 
+        if (rememberMe) {
+          localStorage.setItem("token", token);
+        } else {
+          sessionStorage.setItem("token", token);
+        }
+
+        // Decodificar el token para obtener los roles 
+        const decoded = jwtDecode(token);
+        const roles = decoded.roles;  
+        const user = { email };  
+
+        // Guardar en Redux
+        dispatch(login({ user, role: roles, token }));
+
+        alert("Login exitoso Paciente");
+        navigate("/home-paciente");
       } else {
         alert("Usuario o contraseña incorrectos");
       }
@@ -63,7 +78,6 @@ export function LoginFormPaciente() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">¡Bienvenidos!</h2>
 
           <form className="space-y-4" onSubmit={handleLogin}>
-            {/* Input de Email */}
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
@@ -76,18 +90,16 @@ export function LoginFormPaciente() {
               />
             </div>
 
-            {/* Input de Contraseña con Botón de Visibilidad */}
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
-                type={showPassword ? "text" : "password"} // Alterna entre 'text' y 'password'
+                type={showPassword ? "text" : "password"}
                 placeholder="Contraseña"
                 value={password}
                 onChange={handlePasswordChange}
                 required
                 className="w-full p-3 pl-12 pr-12 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#5603AD] focus:outline-none transition-all"
               />
-              {/* Botón para mostrar/ocultar contraseña */}
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
@@ -97,9 +109,21 @@ export function LoginFormPaciente() {
               </button>
             </div>
 
+            <div className="flex items-center justify-between">
+              <label className="flex items-center text-gray-600 text-sm py-3">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                  className="mr-2"
+                />
+                Remember me
+              </label>
+            </div>
+
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#5603AD] to-[#bda8b9] text-white py-3 rounded-lg transition-all"
+              className="w-full text-white py-3 rounded-lg transition-all button-primary"
             >
               Iniciar Sesión
             </button>
@@ -107,7 +131,7 @@ export function LoginFormPaciente() {
           </form>
         </div>
 
-        <div className="w-1/2 bg-gradient-to-r from-[#bda8b9] via-[#7a34c6] to-[#5603AD] flex flex-col items-center justify-center p-10 text-white rounded-r-3xl transition-all">
+        <div className="w-1/2 button-primary flex flex-col items-center justify-center p-10 text-white rounded-r-3xl transition-all">
           <img
             src={agendar}
             className="w-80 h-auto rounded-lg shadow-lg transform hover:scale-105 transition-transform"

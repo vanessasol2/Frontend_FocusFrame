@@ -3,6 +3,7 @@ import { CalendarDays, XCircle, CheckCircle, Clock3 } from "lucide-react";
 import MainLayout from "../../layout/MainLayout";
 import Filter from "../../components/cita/Filter";
 
+
 const CitasPaciente = () => {
   const [appointments, setAppointments] = useState([
     {
@@ -37,7 +38,7 @@ const CitasPaciente = () => {
         {/* Botón Agendar Cita en la parte superior */}
         <div className="flex justify-end mb-2">
           <button
-            className="bg-[#6D3DBD] text-white py-2 px-6 rounded-lg shadow-md hover:bg-[#8350E8] transition-all duration-300 flex items-center gap-2"
+            className="bg-[#5603ad] text-white py-2 px-6 rounded-lg shadow-md hover:bg-[#47038C] transition-all duration-300 flex items-center gap-2"
             onClick={() => setShowModal(true)}
           >
             <CalendarDays className="w-5 h-5" /> Agendar una cita
@@ -70,7 +71,7 @@ const CitasPaciente = () => {
               <XCircle className="w-6 h-6" />
             </button>
 
-            <h2 className="text-xl font-semibold text-[#6D3DBD] ">
+            <h2 className="text-xl font-semibold text-[#5603ad] ">
               Agendar Cita
             </h2>
             <p className="text-gray-600 mt-2">
@@ -96,7 +97,7 @@ const CitasPaciente = () => {
                 Cancelar
               </button>
               <button
-                className="px-4 py-2 bg-[#8350E8] text-white rounded-lg hover:bg-[#6D3DBD] transition-all duration-300"
+                className="px-4 py-2 bg-[#5603ad] text-white rounded-lg hover:bg-[#47038C] transition-all duration-300"
                 onClick={() => alert("Cita Agendada")}
               >
                 Agendar
@@ -118,11 +119,11 @@ const CitasPaciente = () => {
 
             <div className="flex justify-between items-center text-gray-600">
               <div className="flex items-center gap-2">
-                <CalendarDays className="h-5 w-5 text-[#8350E8]" />
+                <CalendarDays className="h-5 w-5 text-[#5603ad]" />
                 <h2 className="text-sm">{appointment.date}</h2>
               </div>
               <div className="flex items-center gap-2">
-                <Clock3 className="h-5 w-5 text-[#8350E8]" />
+                <Clock3 className="h-5 w-5 text-[#5603ad]" />
                 <p className="text-sm">{appointment.time}</p>
               </div>
             </div>

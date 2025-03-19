@@ -29,8 +29,8 @@ const Pendientes = () => {
   
               {/* Botones */}
               <div className="flex justify-end gap-2">
-                <button className="bg-[#8350E8] text-white px-4 py-1 rounded-lg">Pagar</button>
-                <button className="bg-gray-300 text-gray-700 px-4 py-1 rounded-lg">Ver Detalles</button>
+                <button className="bg-[#5603ad] text-white px-4 py-1 rounded-lg">Pagar</button>
+                <button className="bg-gray-300  text-gray-700 px-4 py-1 rounded-lg">Ver Detalles</button>
               </div>
             </div>
           ))}

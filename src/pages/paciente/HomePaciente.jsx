@@ -1,10 +1,11 @@
 import React from "react";
 import MainLayout from "../../layout/MainLayout";
-import totalCita from "../../img/totalCita.svg";
-import cancelarCita from "../../img/cancelarCita.svg";
-import citasPendientes from "../../img/citasPendientes.svg";
+import Resumen from "../../components/cita/Resumen"
+import "../../components/cita/Resumen.css";
+import { FaCalendarAlt, FaCheckCircle, FaClock, FaTimesCircle, FaBook, FaClipboardCheck, FaUsers } from 'react-icons/fa';
+import { MdCancel } from "react-icons/md";
 
-import completadasCita from "../../img/completadasCita.svg";
+
 
 const HomePaciente = () => {
   const appointments = [
@@ -28,69 +29,55 @@ const HomePaciente = () => {
     },
   ];
 
+  
+
   const resumenData = [
     {
-      title: "Total Citas",
-      value: 15,
-      color: "text-gray-700",
-      bg: "bg-[#f3f0ff]",
-      icon: totalCita,
+        title: "Total Citas",
+        bgColor: "#f3f0ff",
+        icon: <FaCalendarAlt style={{ color: "#7b61ff" }} />,
+        stats: [
+            { icon: <FaUsers />, value: 10 }
+        ]
     },
     {
-      title: "Citas Completadas",
-      value: 1,
-      color: "text-green-800",
-      bg: "bg-green-100",
-      icon: completadasCita,
+        title: "Citas Completadas",
+        bgColor: "#c8e6c9",
+        icon: <FaCheckCircle style={{ color: "#4caf50" }} />,
+        stats: [
+            { icon: <FaClipboardCheck />, value: 4 }
+        ]
     },
     {
-      title: "Citas Pendientes",
-      value: 4,
-      color: "text-yellow-600",
-      bg: "bg-yellow-100",
-      icon: citasPendientes,
+        title: "Citas Pendientes",
+        bgColor: "#fff9c4",
+        icon: <FaClock style={{ color: "#fbc02d" }} />,
+        stats: [
+            { icon: <FaBook />, value: 5 }
+        ]
     },
     {
-      title: "Citas Canceladas",
-      value: 1,
-      color: "text-red-600",
-      bg: "bg-red-100",
-      icon: cancelarCita,
-    },
-  ];
+        title: "Citas Canceladas",
+        bgColor: "#ffcdd2",
+        icon: <FaTimesCircle style={{ color: "#e53935" }} />,
+        stats: [
+            { icon: <MdCancel />, value: 3 }
+        ]
+    }
+];
+  
 
   return (
     <MainLayout>
       
       {/* Sección de Resumen */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 px-6">
-        {resumenData.map((item, index) => (
-          <div
-            key={index}
-            className={`${item.bg} p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-between`}
-          >
-            <div>
-              <h4 className="font-semibold text-gray-600 text-lg">
-                {item.title}
-              </h4>
-              <span className={`text-4xl font-bold ${item.color}`}>
-                {item.value}
-              </span>
-            </div>
-            <img
-              src={item.icon}
-              alt={item.title}
-              className="w-16 h-16 object-contain"
-            />
-          </div>
-        ))}
-      </section>
-
+      <Resumen resumenData={resumenData} />
+      
       {/* Sección de Citas Recientes y Notas */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 px-6">
         {/* Citas Recientes */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-700 mb-6">
+          <h1 className="text-2xl font-semibold text-gray-700 mb-6">
             Citas Recientes
           </h1>
           {appointments.map((appointment, index) => (
@@ -100,7 +87,7 @@ const HomePaciente = () => {
             >
               <div className="flex justify-between items-center">
                 <div>
-                  <h3 className="font-semibold text-gray-800">
+                  <h3 className="font-medium text-gray-800">
                     {appointment.client}
                   </h3>
                   <p className="text-gray-500 text-sm">
@@ -125,8 +112,8 @@ const HomePaciente = () => {
 
         {/* Notas */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-700 mb-6">Notas</h1>
-          <div className="bg-white p-6 rounded-xl shadow-inner overflow-y-auto max-h-96">
+          <h1 className="text-2xl font-semibold  text-gray-700 mb-6">Notas</h1>
+          <div className=" p-6 rounded-xl  overflow-y-auto max-h-96">
             {Array.from({ length: 5 }, (_, index) => (
               <div
                 key={index}

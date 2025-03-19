@@ -12,13 +12,13 @@ const PagosPaciente = () => {
         {/* Botones de Tabs */}
         <div className="flex gap-4">
           <button
-            className={`px-4 py-2 rounded-lg ${activeTab === "pendiente" ? "bg-[#6D3DBD] text-white" : "bg-gray-200 text-gray-600"}`}
+            className={`px-4 py-2 rounded-lg ${activeTab === "pendiente" ? "bg-[#5603ad] text-white" : "bg-gray-200 text-gray-600"}`}
             onClick={() => setActiveTab("pendiente")}
           >
             Pendiente
           </button>
           <button
-            className={`px-4 py-2 rounded-lg ${activeTab === "movimientos" ? "bg-[#6D3DBD] text-white" : "bg-gray-200 text-gray-600"}`}
+            className={`px-4 py-2 rounded-lg ${activeTab === "movimientos" ? "bg-[#5603ad] text-white" : "bg-gray-200 text-gray-600"}`}
             onClick={() => setActiveTab("movimientos")}
           >
             Movimientos
