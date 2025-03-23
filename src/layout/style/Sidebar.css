@@ -11,7 +11,25 @@
     border-radius: 1.5rem;
     overflow: hidden;
   }
+  /* Estilo de los iconos  */
+  .sidebar.collapsed {
+    width: 100px;
+    transition: width 0.3s;
+  }
   
+  .sidebar.expanded {
+    width: 250px;
+    transition: width 0.3s;
+  }
+  
+  /* Estilo del botón de toggle */
+  .toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    color: #5603ad;
+  }
   
   /* Estilos del header del sidebar */
   .sidebar__header {

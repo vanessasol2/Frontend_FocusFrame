@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaSearch, FaPaperPlane, FaCircle } from "react-icons/fa";
 import MainLayout from "../../layout/MainLayout";
+import { Search, Send } from "lucide-react";
 
 const ComunicacionPaciente = () => {
   const [selectedContact, setSelectedContact] = useState(null);
@@ -38,7 +38,7 @@ const ComunicacionPaciente = () => {
       placeholder="Buscar contacto"
       className="w-full p-2 border rounded-lg focus:outline-none pr-8"
     />
-    <FaSearch className="absolute right-3 top-3 text-gray-400" />
+    <Search className="absolute right-3 top-3 text-gray-400" />
   </div>
 
   {/* Lista de contactos */}
@@ -119,7 +119,7 @@ const ComunicacionPaciente = () => {
                   className="flex-1 p-2 border rounded-lg focus:outline-none"
                 />
                 <button className="ml-2 bg-[#6D3DBD] text-white p-3 rounded-full hover:bg-[#8350E8] transition">
-                  <FaPaperPlane />
+                  <Send />
                 </button>
               </footer>
             </>

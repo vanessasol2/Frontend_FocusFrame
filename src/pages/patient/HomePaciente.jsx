@@ -1,9 +1,8 @@
 import React from "react";
 import MainLayout from "../../layout/MainLayout";
-import Resumen from "../../components/cita/Resumen"
-import "../../components/cita/Resumen.css";
-import { FaCalendarAlt, FaCheckCircle, FaClock, FaTimesCircle, FaBook, FaClipboardCheck, FaUsers } from 'react-icons/fa';
-import { MdCancel } from "react-icons/md";
+import Resumen from "../../components/home/Resumen"
+import "../../components/home/Resumen.css";
+import { UsersRound,CalendarCheck2,SquareCheckBig,ClockAlert,BookCopy,UserCheck,BanIcon } from "lucide-react";
 
 
 
@@ -35,33 +34,33 @@ const HomePaciente = () => {
     {
         title: "Total Citas",
         bgColor: "#f3f0ff",
-        icon: <FaCalendarAlt style={{ color: "#7b61ff" }} />,
+        icon: <CalendarCheck2 style={{ color: "#7b61ff" }} />,
         stats: [
-            { icon: <FaUsers />, value: 10 }
+            { icon: <UsersRound />, value: 10 }
         ]
     },
     {
         title: "Citas Completadas",
         bgColor: "#c8e6c9",
-        icon: <FaCheckCircle style={{ color: "#4caf50" }} />,
+        icon: <SquareCheckBig style={{ color: "#4caf50" }} />,
         stats: [
-            { icon: <FaClipboardCheck />, value: 4 }
+            { icon: <UserCheck />, value: 4 }
         ]
     },
     {
         title: "Citas Pendientes",
         bgColor: "#fff9c4",
-        icon: <FaClock style={{ color: "#fbc02d" }} />,
+        icon: <ClockAlert style={{ color: "#fbc02d" }} />,
         stats: [
-            { icon: <FaBook />, value: 5 }
+            { icon: <BookCopy/>, value: 5 }
         ]
     },
     {
         title: "Citas Canceladas",
         bgColor: "#ffcdd2",
-        icon: <FaTimesCircle style={{ color: "#e53935" }} />,
+        icon: <BanIcon style={{ color: "#e53935" }} />,
         stats: [
-            { icon: <MdCancel />, value: 3 }
+            { icon: <BanIcon />, value: 3 }
         ]
     }
 ];

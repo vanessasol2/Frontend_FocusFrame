@@ -1,53 +1,70 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AiOutlineUser } from "react-icons/ai";
-import { MdDateRange, MdOutlinePaid } from "react-icons/md";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { BsFileMedical, BsBoxArrowRight } from "react-icons/bs";
+import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import { HomeIcon,BriefcaseMedical,CircleDollarSign,MessageSquareText,ScanHeart, LogOut, ChevronLast, ChevronFirst } from "lucide-react";
 import "../layout/style/Sidebar.css";
 
 const Sidebar = () => {
   const location = useLocation();
+  const [expanded, setExpanded] = useState(
+    JSON.parse(localStorage.getItem("sidebarExpanded")) ?? true
+  );
+
+  useEffect(() => {
+    localStorage.setItem("sidebarExpanded", JSON.stringify(expanded));
+  }, [expanded]);
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${expanded ? "expanded" : "collapsed"}`}>
       <div>
         <div className="sidebar__header">
-          <h2 className="sidebar__title">FocusFrame</h2>
+          {expanded && <h2 className="sidebar__title">FocusFrame</h2>}
+
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="toggle-btn"
+          >
+            {expanded ? <ChevronLast /> : <ChevronFirst />}
+          </button>
         </div>
 
         <nav className="sidebar__nav">
           <SidebarLink
             to="/home-paciente"
             text="Dashboard"
-            icon={<AiOutlineUser />}
+            icon={<HomeIcon />}
             active={isActive("/home-paciente")}
+            expanded={expanded}
           />
           <SidebarLink
             to="/citas"
             text="Citas"
-            icon={<MdDateRange />}
+            icon={<BriefcaseMedical />}
             active={isActive("/citas")}
+            expanded={expanded}
           />
           <SidebarLink
             to="/pagos"
             text="Pagos"
-            icon={<MdOutlinePaid />}
+            icon={<CircleDollarSign />}
             active={isActive("/pagos")}
+            expanded={expanded}
           />
           <SidebarLink
             to="/comunicacion"
             text="Comunicación"
-            icon={<FaRegCommentAlt />}
+            icon={<MessageSquareText />}
             active={isActive("/comunicacion")}
+            expanded={expanded}
           />
           <SidebarLink
             to="/historial"
             text="Historial Clínico"
-            icon={<BsFileMedical />}
+            icon={<ScanHeart />}
             active={isActive("/historial")}
+            expanded={expanded}
           />
         </nav>
       </div>
@@ -56,14 +73,15 @@ const Sidebar = () => {
         <SidebarLink
           to="/logout"
           text="Sign out"
-          icon={<BsBoxArrowRight />}
+          icon={<LogOut />}
+          expanded={expanded}
         />
       </div>
     </aside>
   );
 };
 
-const SidebarLink = ({ to, text, icon, active }) => {
+const SidebarLink = ({ to, text, icon, active, expanded }) => {
   return (
     <Link
       to={to}
@@ -71,7 +89,7 @@ const SidebarLink = ({ to, text, icon, active }) => {
       aria-current={active ? "page" : undefined}
     >
       <span className="sidebar__link-icon">{icon}</span>
-      <span className="sidebar__link-text">{text}</span>
+      {expanded && <span className="sidebar__link-text">{text}</span>}
     </Link>
   );
 };
