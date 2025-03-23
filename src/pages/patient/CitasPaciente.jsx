@@ -3,9 +3,10 @@ import { CalendarDays, XCircle, CheckCircle, Clock3 } from "lucide-react";
 import MainLayout from "../../layout/MainLayout";
 import Filter from "../../components/cita/Filter";
 import { Dialog } from "@headlessui/react";
+
 const CitasPaciente = () => {
   const [open, setOpen] = useState(false);
-  const [appointments] = useState([
+  const [appointments, setAppointments] = useState([
     {
       id: 1,
       name: "Sara Mateus",
@@ -29,6 +30,59 @@ const CitasPaciente = () => {
     },
   ]);
 
+  const agendarCita = async () => {
+    const fechaSesion = document.querySelector('input[type="date"]').value;
+    const hora = document.querySelector('input[type="time"]').value;
+
+    if (!fechaSesion || !hora) {
+      alert("Por favor, selecciona la fecha y hora.");
+      return;
+    }
+
+    const cita = {
+      idFuncionario: "ID_DEL_PSICOLOGO",
+      idPaciente: "ID_DEL_PACIENTE",
+      nombre: "Nombre del Paciente",
+      fechaSesion,
+      hora,
+      monto: 100,
+      metodoPago: "Efectivo"
+    };
+
+    try {
+      const response = await fetch('http://localhost:8080/sesion/agendarCita', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cita)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Cita Agendada con éxito.");
+        
+        // Actualiza las citas locales
+        setAppointments(prev => [
+          ...prev,
+          {
+            id: data.id, // Asumiendo que el backend retorna un ID
+            name: cita.nombre,
+            date: new Date(fechaSesion).toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric' }),
+            time: hora,
+            status: "Confirmed"
+          }
+        ]);
+        
+        setOpen(false); // Cierra el modal
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.message || 'No se pudo agendar la cita.'}`);
+      }
+    } catch (error) {
+      console.error('Error al agendar la cita:', error);
+      alert("Hubo un error al agendar la cita.");
+    }
+  };
+
   return (
     <MainLayout>
       {/* Contenedor principal */}
@@ -43,20 +97,14 @@ const CitasPaciente = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <h2 className="text-gray-800 font-semibold whitespace-nowrap">
-            Próximas Citas
-          </h2>
+          <h2 className="text-gray-800 font-semibold">Próximas Citas</h2>
           <Filter />
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
       </div>
 
       {/* Modal para Agendar Cita */}
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        className="relative z-10"
-      >
+      <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
         <div className="fixed inset-0 bg-gray-400/75 " />
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-xl w-96 text-center relative">
@@ -70,24 +118,13 @@ const CitasPaciente = () => {
               <div className="flex items-center justify-center rounded-full bg-[#cab0e5] p-2">
                 <CalendarDays className="h-6 w-6 text-[#5603ad]" />
               </div>
-              <h2 className="text-xl font-semibold text-[#5603ad]  ">
-                Agendar Cita
-              </h2>
+              <h2 className="text-xl font-semibold text-[#5603ad]">Agendar Cita</h2>
             </div>
 
-            <p className="text-gray-600 mt-2">
-              Selecciona la fecha y hora para tu cita.
-            </p>
-
+            <p className="text-gray-600 mt-2">Selecciona la fecha y hora para tu cita.</p>
             <div className="mt-4">
-              <input
-                type="date"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8350E8]"
-              />
-              <input
-                type="time"
-                className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8350E8]"
-              />
+              <input type="date" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8350E8]" />
+              <input type="time" className="mt-3 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8350E8]" />
             </div>
 
             <div className="flex justify-between mt-5">
@@ -99,7 +136,7 @@ const CitasPaciente = () => {
               </button>
               <button
                 className="px-4 py-2 bg-[#5603ad] text-white rounded-lg hover:bg-[#47038C] transition-all duration-300"
-                onClick={() => alert("Cita Agendada")}
+                onClick={agendarCita}
               >
                 Agendar
               </button>
@@ -117,7 +154,6 @@ const CitasPaciente = () => {
           >
             <h3 className="text-gray-800 text-lg font-semibold">Psicólogo:</h3>
             <h2 className="text-gray-600 text-lg">{appointment.name}</h2>
-
             <div className="flex justify-between items-center text-gray-600">
               <div className="flex items-center gap-2">
                 <CalendarDays className="h-5 w-5 text-[#5603ad]" />
@@ -128,7 +164,6 @@ const CitasPaciente = () => {
                 <p className="text-sm">{appointment.time}</p>
               </div>
             </div>
-
             <div className="flex items-center space-x-2">
               {appointment.status === "Confirmed" ? (
                 <div className="flex items-center text-green-600 font-medium">

@@ -92,7 +92,7 @@ export function RegisterFormPaciente() {
                 required
                 className="w-full p-3 pl-12 pr-12 border rounded-lg shadow-sm focus:ring-2 focus:ring-[#5603AD] focus:outline-none transition-all"
               />
-              {/* Botón para mostrar/ocultar contraseña */}
+    
               <button
                 type="button"
                 onClick={togglePasswordVisibility}

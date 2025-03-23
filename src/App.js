@@ -8,14 +8,16 @@ import PagosPaciente from "./pages/patient/PagosPaciente";
 import HistorialPaciente from "./pages/patient/HistorialPaciente";
 import ComunicacionPaciente from "./pages/patient/ComunicacionPaciente";
 import ProtectedRoute from "./routes/ProtectedRoute";
-
+import FocusFrameLandingPage from "./pages/focusFrameLandingPage/FocusFrameLandingPage"
 
 function App() {
   return (
     <Routes>
+      {/* Ruta de la Landing Page */}
+      <Route path="/" element={<FocusFrameLandingPage />} />
+
       {/* Rutas públicas */}
       <Route path="/login" element={<LoginFormPaciente />} />
-      <Route path="/register" element={<RegisterFormPaciente />} />
       <Route path="/register/:pacienteId" element={<RegisterFormPaciente />} />
       <Route path="/register-psicologo" element={<RegisterFormPsicologo />} />
 
