@@ -103,7 +103,7 @@ export default function FocusFrameLandingPage() {
                     </a>
                     <button
                         onClick={() => navigate("/register-psicologo")}
-                        className="rounded-md border border-[#5603AD] py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-[#5603AD] hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50"
+                        className="rounded-md border border-[#5603AD] py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-[#5603AD] hover:text-white hover:bg-[#5603AD] hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50"
                     >
                         Registrate
                     </button>
@@ -140,7 +140,7 @@ export default function FocusFrameLandingPage() {
                     <img
                         src={dashboard}
                         alt="FocusFrame Interface"
-                        className="rounded-xl shadow-xl mx-auto w-[700px]"
+                        className=" mx-auto w-[700px]"
                     />
                 </div>
             </section>
