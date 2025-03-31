@@ -40,24 +40,44 @@ export function RegisterFormPsicologo() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setMensajeError("");
-
+  
     try {
       if (step === 1) {
-        const response = await axios.post(`${API_URL}/psicologo/datos-personales`, personal);
-        setPsicologoId(response.data.psicologoId);
-        setStep(2);
-      } else if (step === 2) {
-        await axios.post(`${API_URL}/psicologo/registro`, { psicologoId, ...register });
+        const response = await axios.post(`${API_URL}/funcionario/paso1`, personal);
+        console.log("Respuesta completa del backend:", response);
+  
+        console.log("Paso 1 Response:", response.data);
+        setPsicologoId(response.data);
+  
+  
+        setStep(2)
+      } 
+  
+      else if (step === 2) { 
+       
+        const response = await axios.post(`${API_URL}/funcionario/paso2/${psicologoId}`, {
+          psicologoId, 
+          ...register,
+        });
+  
+        console.log("Paso 2 Response:", response.data);
         setStep(3);
-      } else {
-        await axios.post(`${API_URL}/psicologo/completar-registro`, { psicologoId, ...perfil });
+      }
+  
+      else if (step === 3) {
+       const response= await axios.post(`${API_URL}/funcionario/paso3/${psicologoId}`, { psicologoId, ...perfil });
+       console.log("Paso 3 Response:", response.data);
+
         alert("Registro completo con éxito!");
         navigate("/login");
       }
+  
     } catch (error) {
-      setMensajeError(error.response?.data || "Hubo un error en el registro");
+      console.error("Error en el registro:", error);
+      setMensajeError(error.response?.data || error.message || "Hubo un error en el registro");
     }
   };
+  
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-50 p-6">
