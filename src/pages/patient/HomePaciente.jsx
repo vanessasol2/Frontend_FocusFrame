@@ -33,7 +33,7 @@ const HomePaciente = () => {
   const resumenData = [
     {
         title: "Total Citas",
-        bgColor: "#f3f0ff",
+        bgColor: "#ebe5fc",
         icon: <CalendarCheck2 style={{ color: "#7b61ff" }} />,
         stats: [
             { icon: <UsersRound />, value: 10 }
@@ -116,7 +116,7 @@ const HomePaciente = () => {
             {Array.from({ length: 5 }, (_, index) => (
               <div
                 key={index}
-                className="bg-[#f3f0ff] p-4 rounded-lg shadow mb-4 last:mb-0"
+                className="bg-[#ebe5fc] p-4 rounded-lg shadow mb-4 last:mb-0"
               >
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   Nota {index + 1}

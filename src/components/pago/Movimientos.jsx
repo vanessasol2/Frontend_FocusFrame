@@ -10,7 +10,7 @@ const Movimientos = () => {
       <h2 className="mt-4 text-lg font-semibold text-gray-800">Movimientos</h2>
       
       {/* Encabezado de la tabla */}
-      <div className="grid grid-cols-6 items-center bg-[#E9E5FF] p-3 rounded-t-lg mt-4 font-semibold text-gray-800">
+      <div className="grid grid-cols-6 items-center bg-[#dcd4f4] p-3 rounded-t-lg mt-4 font-semibold text-gray-800">
         <p>Tipo</p>
         <p>Año</p>
         <p>Mes</p>

@@ -7,7 +7,6 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import agendar from "../../img/agendar.webp";
 
-
 export function LoginFormPaciente() {
   const [mensajeError, setMensajeError] = useState("");
   const [password, setPasswordValue] = useState("");
@@ -35,19 +34,16 @@ export function LoginFormPaciente() {
       if (response.data && response.data.token) {
         const token = response.data.token;
 
-        // Guardar el token 
         if (rememberMe) {
           localStorage.setItem("token", token);
         } else {
           sessionStorage.setItem("token", token);
         }
 
-        // Decodificar el token para obtener los roles 
         const decoded = jwtDecode(token);
         const roles = decoded.roles;  
         const user = { email };  
 
-        // Guardar en Redux
         dispatch(login({ user, role: roles, token }));
 
         alert("Login exitoso Paciente");
@@ -119,6 +115,9 @@ export function LoginFormPaciente() {
                 />
                 Remember me
               </label>
+              <a href="/forgot-password" className="text-sm text-[#5603AD] font-semibold hover:underline">
+                ¿Olvidaste tu contraseña?
+              </a>
             </div>
 
             <button
@@ -129,6 +128,10 @@ export function LoginFormPaciente() {
             </button>
             {mensajeError && <p className="text-red-500 text-sm text-center mt-2">{mensajeError}</p>}
           </form>
+
+          <p className="text-sm text-gray-600 mt-4 text-center">
+            © {new Date().getFullYear()} FocusFrame. Todos los derechos reservados.
+          </p>
         </div>
 
         <div className="w-1/2 button-primary flex flex-col items-center justify-center p-10 text-white rounded-r-3xl transition-all">

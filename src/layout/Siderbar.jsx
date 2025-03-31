@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import { logout } from "../redux/slices/AuthSlice";
+import { useDispatch } from "react-redux";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import { HomeIcon,BriefcaseMedical,CircleDollarSign,MessageSquareText,ScanHeart, LogOut, ChevronLast, ChevronFirst } from "lucide-react";
 import "../layout/style/Sidebar.css";
 
 const Sidebar = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); 
+    sessionStorage.removeItem("token");
+    dispatch(logout()); 
+    navigate("/login"); 
+  };
   const [expanded, setExpanded] = useState(
     JSON.parse(localStorage.getItem("sidebarExpanded")) ?? true
   );
@@ -70,13 +80,12 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar__logout">
-        <SidebarLink
-          to="/logout"
-          text="Sign out"
-          icon={<LogOut />}
-          expanded={expanded}
-        />
-      </div>
+  <button onClick={handleLogout} className="logout-button">
+    <LogOut className="logout-icon" />
+    {expanded && <span className="logout-text">Sign out</span>}
+  </button>
+</div>
+
     </aside>
   );
 };

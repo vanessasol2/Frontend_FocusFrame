@@ -9,14 +9,13 @@ export function RegisterFormPaciente() {
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8081";
   const navigate = useNavigate();
 
-  console.log("pacienteId:", pacienteId);
-
   const [mensajeError, setMensajeError] = useState("");
   const [register, setRegister] = useState({
     username: "",  
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false); 
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
 
   const handleChange = (e) => {
     setRegister({
@@ -29,15 +28,23 @@ export function RegisterFormPaciente() {
     setShowPassword(!showPassword);
   };
 
+  const handleCheckboxChange = () => {
+    setAceptaTerminos(!aceptaTerminos);
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!pacienteId) {
       alert("No tienes permiso para completar el perfil");
       return;
     }
+
+    if (!aceptaTerminos) {
+      setMensajeError("Debes aceptar los Términos y Condiciones para continuar.");
+      return;
+    }
+
     setMensajeError("");
-  
-    console.log("Datos a enviar:", register);
   
     try {
       const response = await axios.post(
@@ -46,13 +53,10 @@ export function RegisterFormPaciente() {
         { headers: { "Content-Type": "application/json" } }
       );
   
-      console.log("Perfil completado con éxito paciente:", response.data);
       alert("Perfil completado con éxito Paciente!");
       setRegister({ username: "", password: "" });
-  
       navigate("/login");
     } catch (error) {
-      console.error("Error al completar perfil", error);
       setMensajeError(error.response?.data || "Hubo un error al completar el perfil");
     }
   };
@@ -66,7 +70,6 @@ export function RegisterFormPaciente() {
           <p className="text-gray-500 mb-6">Registra tu cuenta para acceder</p>
 
           <form onSubmit={handleRegister} className="space-y-4">
-            {/* Input de Nombre de usuario */}
             <div className="relative">
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
@@ -80,11 +83,10 @@ export function RegisterFormPaciente() {
               />
             </div>
 
-            {/* Input de Contraseña con botón para mostrar/ocultar */}
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
-                type={showPassword ? "text" : "password"} // Alterna entre texto y contraseña
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Contraseña"
                 value={register.password}
@@ -102,15 +104,37 @@ export function RegisterFormPaciente() {
               </button>
             </div>
 
+            {/* Checkbox para aceptar términos */}
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="terminos"
+                checked={aceptaTerminos}
+                onChange={handleCheckboxChange}
+                className="w-4 h-4 cursor-pointer"
+              />
+              <label htmlFor="terminos" className="text-sm text-gray-600">
+                Acepto los {" "}
+                <a href="/terminos" className="text-[#5603AD] font-semibold hover:underline">
+                  Términos y Condiciones
+                </a> y la {" "}
+                <a href="/privacidad" className="text-[#5603AD] font-semibold hover:underline">
+                  Política de Privacidad
+                </a>.
+              </label>
+            </div>
+
             <button
               type="submit"
-              className="w-full button-primary text-white py-3 rounded-lg transition-all"
+              className={`w-full button-primary text-white py-3 rounded-lg transition-all ${
+                !aceptaTerminos ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={!aceptaTerminos}
             >
               Guardar
             </button>
-            {mensajeError && (
-              <p className="text-red-500 text-sm text-center mt-2">{mensajeError}</p>
-            )}
+            
+            {mensajeError && <p className="text-red-500 text-sm text-center mt-2">{mensajeError}</p>}
           </form>
         </div>
 

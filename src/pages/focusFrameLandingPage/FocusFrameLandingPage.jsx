@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Play,MessageSquare,Repeat,Lock,Calendar,CheckCircle,ChevronDown,} from "lucide-react";
+import { Play, MessageSquare, Repeat, Lock, Calendar, CheckCircle, ChevronDown, } from "lucide-react";
 import dashboard from "../../img/dashboard.png";
 import trabajoG from "../../img/trabajoG.webp";
 import logo from "../../img/logo.png";
@@ -136,13 +136,19 @@ export default function FocusFrameLandingPage() {
                     </div>
                 </div>
 
-                <div className="mt-10 py-9">
-                    <img
-                        src={dashboard}
-                        alt="FocusFrame Interface"
-                        className=" mx-auto w-[700px]"
-                    />
+                <div className="relative flex justify-center items-center mt-10 py-9">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#c084fc]/10 to-[#5603AD]/10 rounded-xl blur-xl"></div>
+
+                    <div className="relative w-full max-w-4xl p-2">
+                        <img
+                            src={dashboard}
+                            alt="FocusFrame Interface"
+                            className="w-full rounded-xl shadow-lg transition-transform duration-500 hover:scale-105"
+                        />
+                    </div>
                 </div>
+
+
             </section>
 
             {/* Segunda Sección */}
@@ -163,8 +169,8 @@ export default function FocusFrameLandingPage() {
                             key={index}
                             onClick={() => handleToggle(index)}
                             className={`p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300  ${activeIndex === index
-                                    ? "bg-gradient-to-r from-[#c084fc] to-[#a855f7] text-white"
-                                    : "bg-[#f3f0ff] text-[#404040]"
+                                ? "bg-gradient-to-r from-[#c084fc] to-[#a855f7] text-white"
+                                : "bg-[#f3f0ff] text-[#404040]"
                                 }`}
                         >
                             <div className="flex flex-col items-center mb-4">
@@ -188,12 +194,8 @@ export default function FocusFrameLandingPage() {
                     {/* Texto Izquierdo */}
                     <div>
                         <h3 className="text-lg font-semibold mb-2">Nosotros</h3>
-                        <h2 className="text-4xl font-bold mb-6">
-                            Transforma tu práctica con
-                        </h2>
-                        <h2 className="text-4xl font-bold mb-6 text-[#5603AD]">
-                            FocusFrame{" "}
-                        </h2>
+                        <h2 className="text-4xl font-bold mb-6">Transforma tu práctica con</h2>
+                        <h2 className="text-4xl font-bold mb-6 text-[#5603AD]">FocusFrame</h2>
 
                         <div className="space-y-6">
                             {[
@@ -213,13 +215,8 @@ export default function FocusFrameLandingPage() {
                                         "La excelencia es nuestra norma. Nos comprometemos a entregar un producto de la más alta calidad garantizando un rendimiento superior.",
                                 },
                             ].map((item, index) => (
-                                <div key={index} className="flex items-start gap-3">
-                                    <div className="mt-1">
-                                        <CheckCircle
-                                            size={20}
-                                            className={`text-${index === 0 ? "[#5603AD]" : "white"}`}
-                                        />
-                                    </div>
+                                <div key={index} className="flex items-center gap-3">
+                                    <CheckCircle size={24} className="text-[#5603AD]" />
                                     <div>
                                         <h4 className="font-bold text-lg">{item.title}</h4>
                                         <p className="text-sm text-gray-200">{item.description}</p>
@@ -232,21 +229,15 @@ export default function FocusFrameLandingPage() {
                     {/* Imagen Derecha */}
                     <div className="relative">
                         <div className="relative">
-                            <img
-                                src={trabajoG}
-                                alt="FocusFrame Team"
-                                className="rounded-2xl shadow-lg"
-                            />
+                            <img src={trabajoG} alt="FocusFrame Team" className="rounded-2xl shadow-lg" />
                             <div className="absolute inset-0 bg-black bg-opacity-30 rounded-2xl"></div>
                         </div>
                         <div className="absolute top-4 left-4 bg-white bg-opacity-80 p-4 rounded-xl text-sm text-gray-800 max-w-[300px] shadow-lg">
-                            En FocusFrame, nos comprometemos a mejorar tu eficiencia y
-                            conexión con los pacientes. Nuestra misión es simplificar la carga
-                            administrativa mediante tecnología avanzada, permitiendo que te
-                            concentres en el cuidado del paciente.
+                            En FocusFrame, nos comprometemos a mejorar tu eficiencia y conexión con los pacientes. Nuestra misión es simplificar la carga administrativa mediante tecnología avanzada, permitiendo que te concentres en el cuidado del paciente.
                         </div>
                     </div>
                 </div>
+
             </section>
 
             {/*Cuarta Sección */}
@@ -272,8 +263,8 @@ export default function FocusFrameLandingPage() {
                                     <ChevronDown
                                         size={20}
                                         className={`transition-transform duration-300 ${openIndex === index
-                                                ? "rotate-180 text-[#7e22ce]"
-                                                : "text-gray-500"
+                                            ? "rotate-180 text-[#7e22ce]"
+                                            : "text-gray-500"
                                             }`}
                                     />
                                 </button>
