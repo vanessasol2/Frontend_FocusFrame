@@ -72,9 +72,16 @@ export function RegisterFormPsicologo() {
         navigate("/login");
       }
   
-    } catch (error) {
+    }catch (error) {
       console.error("Error en el registro:", error);
-      setMensajeError(error.response?.data || error.message || "Hubo un error en el registro");
+      
+      if (error.response) {
+        if (error.response.status === 400) {
+          setMensajeError(error.response.data || "Correo electrónico ya registrado.");
+        }  
+      } else {
+        setMensajeError("Error de conexión con el servidor.");
+      }
     }
   };
   

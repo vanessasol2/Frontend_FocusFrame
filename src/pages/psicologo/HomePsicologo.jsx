@@ -2,70 +2,76 @@ import React from "react";
 import MainLayout from "../../layout/MainLayout";
 import Resumen from "../../components/homePaciente/Resumen"
 import "../../components/homePaciente/Resumen.css";
-import { UsersRound, CalendarCheck2, SquareCheckBig, ClockAlert, BookCopy, UserCheck, BanIcon } from "lucide-react";
+import { UsersRound,CalendarCheck2,SquareCheckBig,ClockAlert,BookCopy,UserCheck,BanIcon } from "lucide-react";
 
-const HomePsicologo = () => {
+
+
+const HomePaciente = () => {
   const appointments = [
     {
-      patient: "Sara Mateus",
+      client: "Sara Mateus",
       status: "Completada",
       time: "1:00pm - 2:30pm",
       date: "23 Nov 2024",
     },
     {
-      patient: "Juan Pérez",
+      client: "Sara Mateus",
       status: "Pendiente",
       time: "3:00pm - 4:00pm",
       date: "24 Nov 2024",
     },
     {
-      patient: "Laura Gómez",
+      client: "Sara Mateus",
       status: "Cancelada",
       time: "10:00am - 11:30am",
       date: "25 Nov 2024",
     },
   ];
 
+  
+
   const resumenData = [
     {
-      title: "Total Citas",
-      bgColor: "#ebe5fc",
-      icon: <CalendarCheck2 style={{ color: "#7b61ff" }} />,
-      stats: [
-        { icon: <UsersRound />, value: 10 },
-      ]
+        title: "Total Citas",
+        bgColor: "#ebe5fc",
+        icon: <CalendarCheck2 style={{ color: "#7b61ff" }} />,
+        stats: [
+            { icon: <UsersRound />, value: 10 }
+        ]
     },
     {
-      title: "Citas Completadas",
-      bgColor: "#c8e6c9",
-      icon: <SquareCheckBig style={{ color: "#4caf50" }} />,
-      stats: [
-        { icon: <UserCheck />, value: 4 },
-      ]
+        title: "Citas Completadas",
+        bgColor: "#c8e6c9",
+        icon: <SquareCheckBig style={{ color: "#4caf50" }} />,
+        stats: [
+            { icon: <UserCheck />, value: 4 }
+        ]
     },
     {
-      title: "Citas Pendientes",
-      bgColor: "#fff9c4",
-      icon: <ClockAlert style={{ color: "#fbc02d" }} />,
-      stats: [
-        { icon: <BookCopy />, value: 5 },
-      ]
+        title: "Citas Pendientes",
+        bgColor: "#fff9c4",
+        icon: <ClockAlert style={{ color: "#fbc02d" }} />,
+        stats: [
+            { icon: <BookCopy/>, value: 5 }
+        ]
     },
     {
-      title: "Citas Canceladas",
-      bgColor: "#ffcdd2",
-      icon: <BanIcon style={{ color: "#e53935" }} />,
-      stats: [
-        { icon: <BanIcon />, value: 3 },
-      ]
+        title: "Citas Canceladas",
+        bgColor: "#ffcdd2",
+        icon: <BanIcon style={{ color: "#e53935" }} />,
+        stats: [
+            { icon: <BanIcon />, value: 3 }
+        ]
     }
-  ];
+];
+  
 
   return (
     <MainLayout>
+      
       {/* Sección de Resumen */}
       <Resumen resumenData={resumenData} />
-
+      
       {/* Sección de Citas Recientes y Notas */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 px-6">
         {/* Citas Recientes */}
@@ -81,7 +87,7 @@ const HomePsicologo = () => {
               <div className="flex justify-between items-center">
                 <div>
                   <h3 className="font-medium text-gray-800">
-                    {appointment.patient}
+                    {appointment.client}
                   </h3>
                   <p className="text-gray-500 text-sm">
                     {appointment.date} | {appointment.time}
@@ -103,10 +109,10 @@ const HomePsicologo = () => {
           ))}
         </div>
 
-        {/* Notas del Psicólogo */}
+        {/* Notas */}
         <div>
-          <h1 className="text-2xl font-semibold text-gray-700 mb-6">Notas del Psicólogo</h1>
-          <div className="p-6 rounded-xl overflow-y-auto max-h-96">
+          <h1 className="text-2xl font-semibold  text-gray-700 mb-6">Notas</h1>
+          <div className=" p-6 rounded-xl  overflow-y-auto max-h-96">
             {Array.from({ length: 5 }, (_, index) => (
               <div
                 key={index}
@@ -116,7 +122,7 @@ const HomePsicologo = () => {
                   Nota {index + 1}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  Esta es una anotación psicológica sobre el paciente. Detalles de la sesión y recomendaciones para el tratamiento.
+                  Esta es la nota número {index + 1}. Muy bien
                 </p>
               </div>
             ))}
@@ -127,4 +133,4 @@ const HomePsicologo = () => {
   );
 };
 
-export default HomePsicologo;
+export default HomePaciente;

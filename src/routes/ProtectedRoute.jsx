@@ -1,22 +1,24 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';  
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { isAuthenticated, role } = useSelector((state) => state.auth);
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
-  // lo redirige al login.
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
+  
+  if (!token) {
+    return <Navigate to="/login" />;
   }
 
-  // Si el usuario está autenticado pero no tiene el rol adecuado.
-  const userHasAccess = role.some((r) => allowedRoles.includes(r));
-  if (!userHasAccess) {
-    return <Navigate to="/unauthorized" replace />;
+  // Decodifica 
+  const decoded = jwtDecode(token);
+  const userRoles = decoded.roles;
+
+  // Si el rol del usuario no está permitido, redirige a la página de acceso denegado
+  if (!allowedRoles.some(role => userRoles.includes(role))) {
+    return <Navigate to="/access-denied" />;
   }
 
-  // renderiza el componente hijo
   return children;
 };
 

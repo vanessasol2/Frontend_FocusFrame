@@ -9,6 +9,14 @@
     margin-left: 1rem;
 }
 
+.user-name {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  
+
 .breadcrumb-title {
     font-size: 1.8rem;
     font-weight: bold;

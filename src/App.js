@@ -3,6 +3,7 @@ import { LoginFormPaciente } from "./auth/paciente/LoginFormPaciente";
 import { RegisterFormPaciente } from "./auth/paciente/RegisterFormPaciente";
 import { RegisterFormPsicologo } from "./auth/psicologo/RegisterFormPsicologo";
 import HomePaciente from "./pages/patient/HomePaciente";
+import HomePsicologo from "./pages/psicologo/HomePsicologo";
 import CitasPaciente from "./pages/patient/CitasPaciente";
 import PagosPaciente from "./pages/patient/PagosPaciente";
 import HistorialPaciente from "./pages/patient/HistorialPaciente";
@@ -63,6 +64,15 @@ function App() {
         element={
           <ProtectedRoute allowedRoles={["PACIENTE"]}>
             <ComunicacionPaciente />
+          </ProtectedRoute>
+        } 
+      />
+
+      <Route 
+        path="/home-psicologo" 
+        element={
+          <ProtectedRoute allowedRoles={["PSICOLOGO"]}>
+            <HomePsicologo />
           </ProtectedRoute>
         } 
       />

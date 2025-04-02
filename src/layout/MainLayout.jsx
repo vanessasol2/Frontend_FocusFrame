@@ -3,15 +3,20 @@ import Header from "../layout/Header";
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="flex h-screen overflow-hidden bg-[#f6f8fc]"> 
-      <Sidebar className="h-full" /> 
-      <div className="flex-1 flex flex-col pl-4 pr-4 pt-4 h-full overflow-auto"> 
-        <Header />
-        <main className="p-4">{children}</main>
+    <div className="h-screen flex bg-[#f6f8fc]">
+      {/* LEFT Sidebar */}
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar className="h-full" /> 
+      </div>
+
+      {/* RIGHT Content */}
+      <div className="flex-1 bg-[#F7F8FA] overflow-auto flex flex-col">
+        <Header /> 
+        <main className="flex-1 p-6">{children}</main>
       </div>
     </div>
   );
 };
 
-
 export default MainLayout;
+
